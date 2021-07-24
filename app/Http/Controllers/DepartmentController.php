@@ -18,7 +18,7 @@ class DepartmentController extends Controller
     }
 
     public function showAll() {
-        return DB::select("SELECT * FROM departments");
+        return response()->json(DB::select("SELECT * FROM departments"), 200);
     }
 
     public function create(Request $request) {
@@ -30,7 +30,8 @@ class DepartmentController extends Controller
             `description`) VALUES (
             '$title', 
             '$description')");
-        return $result;
+            
+        return $result == 1 ? response()->make('', 201) : response()->make('', 400) ; 
     }
 
 }

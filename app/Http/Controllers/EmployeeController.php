@@ -25,7 +25,7 @@ class EmployeeController extends Controller
         $select =  $department_id ? "SELECT * FROM employees WHERE department_id = $department_id"
         : "SELECT * FROM employees";
 
-        return DB::select($select);
+        return response()->json(DB::select($select), 200);
     }
 
 
@@ -51,6 +51,7 @@ class EmployeeController extends Controller
                 $salary_amount, 
                 '$salary_currency', 
                 $department_id)");
-        return $result;
+
+        return $result == 1 ? response()->make('', 201) : response()->make('', 400) ; 
     }
 }
