@@ -13,10 +13,6 @@
 |
 */
 
-$router->get('/key', function() {
-    return \Illuminate\Support\Str::random(32);
-});
-
 $router->group(['prefix' => 'departments'], function() use ($router) {
     $router->get('/',  ['uses' => 'DepartmentController@showAll']);
     $router->post('/',  ['uses' => 'DepartmentController@create']);
