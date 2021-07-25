@@ -21,9 +21,13 @@ class EmployeeController extends Controller
 
         $department_id = $request->department_id;
 
-        
-        $select =  $department_id ? "SELECT * FROM employees WHERE department_id = $department_id"
-        : "SELECT * FROM employees";
+        if ($department_id) {
+            // Return all department employees
+            $select = "SELECT * FROM employees WHERE department_id = $department_id";
+        } else {
+            // Return all employees
+            $select = "SELECT * FROM employees";
+        }
 
         return response()->json(DB::select($select), 200);
     }

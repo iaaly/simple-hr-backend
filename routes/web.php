@@ -30,4 +30,5 @@ $router->group(['prefix' => 'employees'], function() use ($router) {
 $router->group(['prefix' => 'reports'], function() use ($router) {
     $router->get('/101', ['uses' => 'ReportController@departmentsWithMaxSalary']);
     $router->get('/102', ['uses' => 'ReportController@highValueDepartments']);
+    $router->get('/201', ['uses' => 'ReportController@employeesRepartition']);
 });
