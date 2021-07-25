@@ -34,7 +34,7 @@ class ReportController extends Controller
         INNER JOIN employees e 
         ON d.id = e.department_id 
         WHERE e.salary_amount > 50000
-        GROUP BY d.id
+        GROUP BY d.id, d.title
         HAVING `value` > 2";
 
         return $this->fetchReport($query);
