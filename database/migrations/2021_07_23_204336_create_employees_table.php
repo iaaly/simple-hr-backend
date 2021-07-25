@@ -19,7 +19,7 @@ class CreateEmployeesTable extends Migration
             $table->string('last_name');
             $table->string('position');
             $table->integer('salary_amount'); // yearly
-            $table->string('salary_currency', 3);
+            $table->string('salary_currency', 3)->default('EUR');
             $table->timestamps();
 
             $table->foreignId('department_id')->constrained();

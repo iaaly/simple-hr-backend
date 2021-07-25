@@ -22,3 +22,8 @@ $router->group(['prefix' => 'employees'], function() use ($router) {
     $router->get('/',  ['uses' => 'EmployeeController@showAll']);
     $router->post('/',  ['uses' => 'EmployeeController@create']);
 });
+
+$router->group(['prefix' => 'reports'], function() use ($router) {
+    $router->get('/101', ['uses' => 'ReportController@departmentsWithMaxSalary']);
+    $router->get('/102', ['uses' => 'ReportController@highValueDepartments']);
+});
