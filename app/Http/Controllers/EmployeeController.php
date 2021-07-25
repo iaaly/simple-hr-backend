@@ -35,22 +35,27 @@ class EmployeeController extends Controller
         $last_name = $request->input('last_name');
         $position = $request->input('position');
         $salary_amount = $request->input('salary_amount');
-        $salary_currency = $request->input('salary_currency');
         $department_id = intval($request->input('department_id'));
 
-        $result = DB::insert("INSERT INTO employees (
+        // Using DB:raw to protect against MYSQL injection and invalid characters. 
+        $insert = DB::raw("INSERT INTO employees (
             `first_name`, 
             `last_name`,
             `position`,
             `salary_amount`,
-            `salary_currency`,
             `department_id`) VALUES (
-                '$first_name', 
-                '$last_name', 
-                '$position', 
-                $salary_amount, 
-                '$salary_currency', 
-                $department_id)");
+                :first_name, 
+                :last_name, 
+                :position, 
+                :salary_amount, 
+                :department_id)");
+
+        $result = DB::insert($insert, array(
+            'first_name' => $first_name,
+            'last_name' => $last_name,
+            'position' => $position,
+            'salary_amount' => $salary_amount,
+            'department_id' => $department_id));
 
         return $result == 1 ? response()->make('', 201) : response()->make('', 400) ; 
     }

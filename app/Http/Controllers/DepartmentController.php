@@ -25,11 +25,11 @@ class DepartmentController extends Controller
         $title = $request->input('title');
         $description = $request->input('description');
 
-        $result = DB::insert("INSERT INTO departments (
-            `title`, 
-            `description`) VALUES (
-            '$title', 
-            '$description')");
+        // Using DB:raw to protect against MYSQL injection and invalid characters. 
+        $insert = DB::raw("INSERT INTO departments (`title`,`description`) 
+        VALUES (:title, :description)");
+
+        $result = DB::insert($insert, array('title' => $title,'description' => $description));
             
         return $result == 1 ? response()->make('', 201) : response()->make('', 400) ; 
     }
