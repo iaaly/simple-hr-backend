@@ -18,11 +18,11 @@ class DepartmentController extends Controller
     }
 
     public function showAll() {
-        return response()->json(DB::select("SELECT d.*, COUNT(*) AS employees_count 
+        return response()->json(DB::select("SELECT d.id, d.title, d.description, COUNT(*) AS employees_count 
         FROM departments d 
         INNER JOIN employees e
         ON d.id = e.department_id
-        GROUP BY d.id"), 200);
+        GROUP BY d.id, d.title, d.description"), 200);
     }
 
     public function create(Request $request) {
