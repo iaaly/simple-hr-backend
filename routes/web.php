@@ -13,6 +13,10 @@
 |
 */
 
+$router->get('/', function () use ($router) {
+    return "Backend server to <a href='" . env('FRONTEND_ADDRESS') . "'>Simple HR App</a>";
+});
+
 $router->group(['prefix' => 'departments'], function() use ($router) {
     $router->get('/',  ['uses' => 'DepartmentController@showAll']);
     $router->post('/',  ['uses' => 'DepartmentController@create']);

@@ -15,7 +15,7 @@ class CorsMiddleware
     public function handle($request, Closure $next)
     {
         $headers = [
-            'Access-Control-Allow-Origin'      => $_ENV["FRONTEND_ADDRESS"],
+            'Access-Control-Allow-Origin'      => env("FRONTEND_ADDRESS"),
             'Access-Control-Allow-Methods'     => 'POST, GET, OPTIONS, PUT, DELETE',
             'Access-Control-Allow-Credentials' => 'true',
             'Access-Control-Max-Age'           => '86400',
