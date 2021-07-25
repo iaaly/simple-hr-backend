@@ -18,18 +18,18 @@ class ReportController extends Controller
     }
 
     public function departmentsWithMaxSalary() {
-        $query = "SELECT d.*, coalesce(MAX(e.salary_amount), 0)  AS `value`
+        $query = "SELECT d.id, d.title, coalesce(MAX(e.salary_amount), 0)  AS `value`
         FROM departments d 
         LEFT JOIN employees e 
         ON d.id = e.department_id 
-        GROUP BY d.id";
+        GROUP BY d.id, d.title";
 
         return $this->fetchReport($query);
     }
 
     
     public function highValueDepartments() {
-        $query = "SELECT d.*, COUNT(*) as `value`
+        $query = "SELECT d.id, d.title, COUNT(*) as `value`
         FROM departments d 
         INNER JOIN employees e 
         ON d.id = e.department_id 
